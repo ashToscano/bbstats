@@ -1,0 +1,99 @@
+<ion-view title="Game Roster">
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+  <ion-nav-buttons side="right">
+    <button class="button button-calm">{{vGm.vGH.pp}}</button>
+    <span class="button button-stable"> </span>
+    <button class="button button-dark">{{vGm.vGV.pp}}</button>
+  </ion-nav-buttons>
+
+<ion-content class="has-header">
+
+<div class="row">
+  <div class="col-20 text-center">  
+      <span class="button-small"> Opp: </span>
+<br> <button ng-click="pTally('v2p', -1)" class="button button-small button-dark">2P</button>
+<br><br>     <button ng-click="pTally('v3p', -1)" class="button button-small button-dark">3P</button>
+ <br><br>          <button ng-click="pTally('vft', -1)" class="button button-small button-dark">1P</button>
+      <br><br>  <button ng-click="pTally('vpf', -1)" class="button button-small button-dark">pf: {{vGm.vGV.ff}}</button>
+
+<br><br> <span class="button button-small button-stable">  {{ appLog }}  </span>  
+
+<br><br>  
+     
+  <button class="button button-small button-stable" ng-click="tglundoCB()">  
+      <input type="checkbox" ng-model="undoCB"> undo </button>
+
+<br><br><br><br>  
+     
+  <button ng-click="resetGM()"  class="button button-small button-stable">reset </button>
+</div>  
+<div class="col text-center">
+        <button ng-click="pTally('yft', -1)"  class="button   button-balanced"> FT.y </button>
+   &nbsp;  <button ng-click="pTally('xft', -1)"  class="button   button-energized"> ft.x </button>
+     <br>  <br>
+           <button ng-click="pTally('y2p', -1)"  class="button   button-balanced"> 2P.y </button>
+   &nbsp;  <button ng-click="pTally('x2p', -1)"  class="button   button-energized"> 2p.x </button>
+     <br>  <br>
+       <button ng-click="pTally('y3p', -1)"  class="button   button-balanced"> 3P.y </button>
+   &nbsp;  <button ng-click="pTally('x3p', -1)"  class="button   button-energized"> 3p.x </button>
+     <br>  <br>
+          <button ng-click="pTally('drb', -1)"  class="button   button-balanced"> d.RB </button>
+     &nbsp;   &nbsp;  &nbsp; <button ng-click="pTally('orb', -1)"  class="button  button-small   button-royal"> o.RB </button>     
+
+    <br><br>         <button ng-click="pTally('ast', -1)"  class="button    button-small   button-royal"> AST </button>
+     &nbsp; &nbsp;  <button ng-click="pTally('stl', -1)"  class="button  button-small     button-royal"> STL </button>
+     &nbsp; &nbsp;      <button ng-click="pTally('blk', -1)"  class="button   button-small    button-royal"> BLK </button>          
+  <br><br>      <button ng-click="pTally('tov', -1)"  class="button  button-small   button-assertive"> TOV </button>
+       &nbsp;   &nbsp;  &nbsp;        <button ng-click="pTally('pf', -1)"  class="button  button-small   button-energized"> p.F </button>
+  <br><br>               <button ng-click="pTally('tf', -1)"  class="button  button-small   button-assertive"> t.F </button>
+</div>
+     <div class="col-25 text-center">
+      <span  ng-repeat="vv in vGm.Nu"  ng-show="vGm.onc[$index]">   
+<br>      <button class="button button-small button-calm" ng-click="pTally(ttIdx, $index)">  {{vGm.Nm[$index]}} &nbsp;{{vGm.Nu[$index]}} </button>
+<br>       <strong> {{ vGm.pp[$index] }}  </strong> 
+<br> 
+      </span>
+</div>
+</div>
+
+      <!-- href="#/app/playlists/{{vGm.Nu}}" -->
+
+    <ion-list>
+      <ion-item class="card" ng-repeat="bb in vGm.Nu">   
+      
+<div class="row">   <div class="col-20 text-center">
+      <span class="button button-small button-stable">  {{vGm.Nm[$index]}}  {{vGm.Nu[$index]}} </span>
+<br><br> <strong> {{ vGm.pp[$index] }} </strong>
+</div>
+   <div class="col text-center">
+  <label class="toggle toggle-small toggle-calm">
+    <input type="checkbox" ng-model="vGm.onc[$index]" ng-change="pTally('+', -1)" >
+      <div class="track">
+        <div class="handle"></div>
+      </div>
+  </label>  
+   &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;
+    <input type="checkbox" ng-model="vGm.q1[$index]">       &nbsp;
+    <input type="checkbox" ng-model="vGm.q2[$index]">       &nbsp;
+    <input type="checkbox" ng-model="vGm.q3[$index]">       &nbsp;
+    <input type="checkbox" ng-model="vGm.q4[$index]">       &nbsp;
+<div class="row-fluid"><span class="button button-small button-light">       
+ pf: {{ vGm.pf[$index] }}  &nbsp;  &nbsp; tov: {{ vGm.tov[$index] }}
+  <br> 2p:  {{vGm.y2p[$index]}}/{{vGm.y2p[$index] + vGm.x2p[$index]}} [{{ vGm.rrfg[$index] }}%]
+  &nbsp;&nbsp; 3p: {{ vGm.y3p[$index] }}/{{vGm.y3p[$index] + vGm.x3p[$index] }} [{{ vGm.rr3p[$index] }}%]
+  &nbsp;&nbsp; ft: {{ vGm.yft[$index] }}/{{vGm.yft[$index] + vGm.xft[$index] }} [{{ vGm.rrft[$index] }}%] 
+<br>  ast: {{ vGm.ast[$index] }} &nbsp; stl: {{ vGm.stl[$index] }}
+  &nbsp; blk: {{ vGm.blk[$index] }}  &nbsp; d.Rb: {{ vGm.drb[$index] }}  &nbsp; o.Rb: {{ vGm.orb[$index] }} &nbsp; t.F: {{ vGm.tf[$index] }}
+</span></div>
+
+  </div></div>
+
+      </ion-item>
+    </ion-list>
+
+  <h2> </h2>  <button ng-click="resetGM()"  class="button button-small button-stable">reset </button>
+
+  </ion-content>
+</ion-view>
